@@ -28,7 +28,8 @@ This is by no means a comprehensive step-by-step of my process, but rather a few
 - VirtualBox (for virtualising the lab environment)
 
 ## Network Diagram
-![NetworkDiagram-ActiveDirectoryProject drawio](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/f44ce545-f677-4006-8a65-b447b6d2978f)
+
+[![NetworkDiagram-ActiveDirectoryProject drawio](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/f44ce545-f677-4006-8a65-b447b6d2978f)](https://imgur.com/ib3A0G1)
 
 ## Setting up Splunk server and Forwarders
 ### Setting Static IP Address and Default Route:
@@ -68,11 +69,13 @@ Created an inputs.conf file in C:\Program Files\SplunkUniversalForwarder\etc\sys
 ### Restarting Splunk Forwarder Service:
 
 Restarted the Splunk Forwarder service on ADDC01 and set to log on as local system account.
+
 ![2024-06-28 22_21_07-ADDC01  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/4aa87cdf-4e3e-49a8-a2fe-a0eae7de8f4f)
 
 ### Connecting to Splunk Web Interface:
 
 Accessed the Splunk server's web interface at port 8000, then created an index named endpoint as specified in the inputs.conf file. I repeated this process for both ADDC01 and target-PC to ensure the Splunk server receives events from both sources.
+
 ![2024-06-29 23_05_02-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/fa26209e-7ad2-4136-a5f5-7ec7fba9c232)
 
 ## Setting up Active Directory and provisioning users.
