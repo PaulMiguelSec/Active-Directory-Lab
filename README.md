@@ -49,7 +49,7 @@ Apply the changes:
 ```mydfir@splunk:/opt/splunk/bin$ sudo ./splunk enable boot-start -user splunk```
 
 ### Setting Up Splunk Forwarder:
-Installed and configured Splunk Forwarder on ADDC01 and target-PC to send data to the Splunk server as a receiving indexer.
+Installed and configured Splunk Forwarder on ADDC01 and target-PC (Windows 10) to send data to the Splunk server as a receiving indexer.
 
 ![2024-06-28 22_10_10-ADDC01  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/54bdd7fe-3954-4c2e-8613-6ec049293241)
 
