@@ -12,10 +12,9 @@ This is by no means a comprehensive step-by-step of my process, but rather a few
 - Configuring and managing Active Directory domain environments
 - Setting up and utilizing Splunk for security event monitoring and analysis
 - Simulating bruteforce attack using Kali Linux
-- Setting up Atomic Red Team and running tests
+- Performing cybersecurity tests using Atomic Red Team.
 - Identifying and interpreting security events generated from attacks via Splunk
-- Troubleshooting and fine-tuning Splunk data ingestion
-- Understanding the interaction between different components in a domain environment
+- Analyzing and correlating security events in Splunk with the MITRE ATT&CK framework.
 
 ### Tools Used
 
@@ -109,3 +108,54 @@ Among these, there are two events with event code 4264, representing successful 
 Here we can see that the attack indeed came from the Kali machine at 192.168.10.250
 
 ![2024-06-29 22_47_20-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/2770fcbd-b06a-4ba2-8b40-10d6a2ca347f)
+
+## Installing Atomic Red Team, Performing a Test, and Reviewing Events in Splunk
+
+Atomic Red Team is an open-source project that offers a collection of tests to simulate cyberattacks based on the MITRE ATT&CK framework.
+
+Before installing Atomic Red Team (ATR) on target_PC, I excluded the C: drive (where ATR will be installed) from Microsoft Defender Anti-Virus scans. Note: This exclusion is not recommended for normal circumstances.
+
+To allow PowerShell scripts to run without restrictions for the current user, I used the command:
+```Set-ExecutionPolicy Bypass -Scope CurrentUser```
+
+![2024-06-30 10_41_18-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/3df29cb5-77f4-4d34-8db9-e112b23f2c04)
+![2024-06-30 10_44_49-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/69ef5c78-2b1e-4ac4-82d3-2b66eef8e699)
+
+Next, I installed ATR using the following commands:
+
+![2024-06-30 10_51_22-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/853de60c-1d63-4a9b-b9a1-43e50401b827)
+
+Now we can view all the tests available in Atomic Red Team. Each test is named after the corresponding MITRE ATT&CK technique. For example, I ran the T1136.001 test, which corresponds to the "Create Account: Local Account" persistence technique in MITRE ATT&CK.
+
+![2024-06-30 10_54_52-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/189a3b58-e48d-426a-bfca-9e2ad1da5d1e)
+![2024-06-30 11_35_37-](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/febce88b-103b-4330-ba3a-80458c62cd0d)
+
+Running the test created a user called NewLocalUser, added it to the local administrators group, and finally deleted the user.
+
+![2024-06-30 11_03_17-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/9426fff8-1b57-4ae5-8d69-5aa5f1b00959)
+
+We see these events in Splunk.
+
+![2024-06-30 11_07_37-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/d9d4a3d4-a2ca-4542-bda1-e31a7db4472a)
+
+Here are the corresponding event codes:
+- 4798: A user's local group membership was enumerated.
+- 4738: A user account was changed.
+- 4720: A user account was created.
+- 4722: A user account was enabled.
+- 4724: An attempt was made to reset an account's password.
+- 4726: A user account was deleted.
+
+![2024-06-30 11_49_00-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/06f90944-7158-4630-b824-e3f742759c78)
+
+Below is the final event showing "NewLocalUser" being deleted
+
+![2024-06-30 11_49_34-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/feb94ab2-9222-4a1a-99b4-020f09bfda07)
+
+# Conclusion
+
+This lab has been a fantastic learning experience for me. I've set up Splunk Enterprise on Ubuntu, deployed Splunk forwarders, performed tests with Atomic Red Team, and analyzed results in Splunk following the MITRE ATT&CK framework. I also used Kali Linux to simulate a brute force attack and reviewed the outcome in Splunk.
+
+Through setting all this up, I've sharpened my skills in virtualization with VirtualBox, general Windows and Linux processes and learned the essentials of setting up Active Directory on Windows Server.
+
+I'm excited to keep building on this lab. My next steps include creating Splunk alerts, tweaking group policies, and just generally tinkering around in the domain environment. There's always more to learn, and I'm looking forward to it!
