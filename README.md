@@ -1,5 +1,28 @@
 # Active Directory Lab
 
+<details>
+  <summary><strong>Table of Contents</strong></summary>
+  <br>
+
+  1. [Objective](#objective)
+  2. [Skills Learned](#skills-learned)
+  3. [Tools Used](#tools-used)
+  4. [Network Diagram](#network-diagram)
+  5. [Setting up Splunk Server and Forwarders](#setting-up-splunk-server-and-forwarders)
+      - [Setting Static IP Address and Default Route](#setting-static-ip-address-and-default-route)
+      - [Install Splunk Enterprise](#install-splunk-enterprise)
+      - [Setting Up Splunk Forwarder](#setting-up-splunk-forwarder)
+      - [Installing Sysmon](#installing-sysmon)
+      - [Configuring Inputs for Splunk Forwarder](#configuring-inputs-for-splunk-forwarder)
+      - [Restarting Splunk Forwarder Service](#restarting-splunk-forwarder-service)
+      - [Connecting to Splunk Web Interface](#connecting-to-splunk-web-interface)
+  6. [Setting up Active Directory and Provisioning Users](#setting-up-active-directory-and-provisioning-users)
+  7. [Performing a Brute Force Attack on Target_PC and Reviewing Events via Splunk](#performing-a-brute-force-attack-on-target_pc-and-reviewing-events-via-splunk)
+  8. [Installing Atomic Red Team, Performing a Test, and Reviewing Events in Splunk](#installing-atomic-red-team-performing-a-test-and-reviewing-events-in-splunk)
+  9. [Conclusion](#conclusion)
+
+</details>
+
 ## Objective
 
 This lab is all about getting hands-on with Active Directory and security monitoring. I've set up Windows Server 2022 AD domain controller and a Ubuntu Splunk server, then used Kali Linux to play the role of an attacker in the network. The goal is to see what kind of events get generated from these attacks and learn how to configure and use Splunk to catch them. I aim to dive into domain environments and sharpen threat detection skills.
