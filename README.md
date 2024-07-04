@@ -53,7 +53,9 @@ This is by no means a comprehensive step-by-step of my process, but rather a few
 
 [![NetworkDiagram-ActiveDirectoryProject drawio](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/f44ce545-f677-4006-8a65-b447b6d2978f)](https://imgur.com/ib3A0G1)
 
-## Setting up Splunk server and Forwarders
+<details>
+<summary><h2>Setting up Splunk server and Forwarders</h2></summary>
+
 ### Setting Static IP Address and Default Route:
 
 - Configured a static IP address for the Splunk server and defined a default route with the gateway 192.168.10.10.
@@ -99,8 +101,10 @@ Restarted the Splunk Forwarder service on ADDC01 and set to log on as local syst
 Accessed the Splunk server's web interface at port 8000, then created an index named endpoint as specified in the inputs.conf file. I repeated this process for both ADDC01 and target-PC to ensure the Splunk server receives events from both sources.
 
 ![2024-06-29 23_05_02-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/fa26209e-7ad2-4136-a5f5-7ec7fba9c232)
+</details>
 
-## Setting up Active Directory and provisioning users.
+<details>
+<summary><h2>Setting up Active Directory and provisioning users</h2></summary>
 
 Install Active Directory Domain Services on ADDC01
 
@@ -114,8 +118,10 @@ I joined target_PC to the domain and tinkered around with users, groups and perm
 
 ![2024-06-29 21_19_12-ADDC01 (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/64f8e66c-9404-40de-bb38-5e15b0b4d69a)
 ![2024-06-29 21_23_00-ADDC01 (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/5501aaa0-120e-4540-8630-00087fb0f77d)
+</details>
 
-## Performing a Brute force attack on target_PC and reviewing events via Splunk
+<details>
+<summary><h2>Performing a Brute force attack on target_PC and reviewing events via Splunk</h2></summary>
 
 I used crowbar to launch a brute force dictionary attack on target_PC from the Kali Linux machine. I had enabled RDP on target_PC beforehand so this attack would be feasable.
 
@@ -131,8 +137,10 @@ Among these, there are two events with event code 4264, representing successful 
 Here we can see that the attack indeed came from the Kali machine at 192.168.10.250
 
 ![2024-06-29 22_47_20-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/2770fcbd-b06a-4ba2-8b40-10d6a2ca347f)
+</details>
 
-## Installing Atomic Red Team, Performing a Test, and Reviewing Events in Splunk
+<details>
+<summary><h2>Installing Atomic Red Team, Performing a Test, and Reviewing Events in Splunk</h2></summary>
 
 Atomic Red Team is an open-source project that offers a collection of tests to simulate cyberattacks based on the MITRE ATT&CK framework.
 
@@ -174,6 +182,7 @@ Here are the corresponding event codes:
 Below is the final event showing "NewLocalUser" being deleted
 
 ![2024-06-30 11_49_34-target-PC (Snapshot 1)  Running  - Oracle VM VirtualBox](https://github.com/PaulMiguelSec/Active-Directory-Lab/assets/174075754/feb94ab2-9222-4a1a-99b4-020f09bfda07)
+</details>
 
 # Conclusion
 
